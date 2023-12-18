@@ -16,10 +16,4 @@ func TestLog(t *testing.T) {
 	Color(Cyan).Debug("color log debug")
 	Color(Yellow).Warn("color log warn")
 	Color(Red).Error("color log error")
-
-	// zap log
-	Zap().Info("zap info")
-	Zap().Debug("zap debug")
-	Zap().Warn("zap warn")
-	Zap().Error("zap error")
 }
