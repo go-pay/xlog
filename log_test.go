@@ -9,14 +9,16 @@ func TestLog(t *testing.T) {
 	// Cyan, "青色 debug", Reset, CyanBright, "高亮 debug", Reset, "恢复默认颜色", CyanDelLine, "删除线", Reset, CyanUnderLine, "下划线", Reset, CyanBevel, "斜体 debug", Reset, CyanBg, "背景", Reset
 	// default log
 	SetLevel(DebugLevel)
-	SetColorful(false)
+	SetColorful(true)
 
 	Debug("Debug 日志")
 	Info("Info 日志")
 	Warn("Warn 日志")
 	Error("Error 日志")
 
-	Debugf("Debugf %s", "日志")
+	log.Println("================")
+
+	Debugf("Debugf %s, %s, %d", "日志", "asdasda", 4)
 	Infof("Infof %s", "日志")
 	Warnf("Warnf %s", "日志")
 	Errorf("Errorf %s", "日志")
@@ -31,6 +33,8 @@ func TestLog(t *testing.T) {
 	xLogger.Info("new logger Info 日志")
 	xLogger.Warn("new logger Warn 日志")
 	xLogger.Error("new logger Error 日志")
+
+	log.Println("================")
 
 	xLogger.Debugf("new logger Debugf %s", "日志")
 	xLogger.Infof("new logger Infof %s", "日志")

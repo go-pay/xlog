@@ -88,18 +88,18 @@ func (l *Logger) print(logger *log.Logger, col *ColorType, format *string, args 
 		if l.col != nil {
 			// 设置过自定义颜色，优先自定义颜色
 			if format != nil {
-				_ = logger.Output(callDepth, string(*l.col)+fmt.Sprintf(*format, args...)+string(*Reset))
+				_ = logger.Output(callDepth, string(*l.col)+fmt.Sprintf(*format, args...))
 				return
 			}
-			_ = logger.Output(callDepth, string(*l.col)+fmt.Sprintln(args...)+string(*Reset))
+			_ = logger.Output(callDepth, string(*l.col)+fmt.Sprint(args...))
 			return
 		}
 		// 没有自定义颜色，采用默认色系
 		if format != nil {
-			_ = logger.Output(callDepth, string(*col)+fmt.Sprintf(*format, args...)+string(*Reset))
+			_ = logger.Output(callDepth, string(*col)+fmt.Sprintf(*format, args...))
 			return
 		}
-		_ = logger.Output(callDepth, string(*col)+fmt.Sprintln(args...)+string(*Reset))
+		_ = logger.Output(callDepth, string(*col)+fmt.Sprint(args...))
 		return
 	}
 	// 不输出颜色
