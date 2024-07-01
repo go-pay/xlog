@@ -8,52 +8,59 @@ const (
 )
 
 const (
-	callDepth = 3
+	callDepth = 4
 )
 
 type LogLevel int
 
 var (
-	debugLog XLogger = &DebugLogger{}
-	infoLog  XLogger = &InfoLogger{}
-	warnLog  XLogger = &WarnLogger{}
-	errLog   XLogger = &ErrorLogger{}
-
-	Level LogLevel
+	logger = &Logger{level: InfoLevel}
 )
 
-type XLogger interface {
-	LogOut(col *ColorType, format *string, args ...any)
+func SetLevel(level LogLevel) {
+	logger.level = level
 }
 
-func Info(args ...any) {
-	infoLog.LogOut(nil, nil, args...)
+func SetColorful(colorful bool) {
+	logger.colorful = colorful
 }
 
-func Infof(format string, args ...any) {
-	infoLog.LogOut(nil, &format, args...)
-}
-
+// 青色:Cyan
 func Debug(args ...any) {
-	debugLog.LogOut(nil, nil, args...)
+	logger.logout(DebugLevel, nil, args...)
 }
 
+// 青色:Cyan
 func Debugf(format string, args ...any) {
-	debugLog.LogOut(nil, &format, args...)
+	logger.logout(DebugLevel, &format, args...)
 }
 
+// 白色:White
+func Info(args ...any) {
+	logger.logout(InfoLevel, nil, args...)
+}
+
+// 白色:White
+func Infof(format string, args ...any) {
+	logger.logout(InfoLevel, &format, args...)
+}
+
+// 黄色:Yellow
 func Warn(args ...any) {
-	warnLog.LogOut(nil, nil, args...)
+	logger.logout(WarnLevel, nil, args...)
 }
 
+// 黄色:Yellow
 func Warnf(format string, args ...any) {
-	warnLog.LogOut(nil, &format, args...)
+	logger.logout(WarnLevel, &format, args...)
 }
 
+// 红色:Red
 func Error(args ...any) {
-	errLog.LogOut(nil, nil, args...)
+	logger.logout(ErrorLevel, nil, args...)
 }
 
+// 红色:Red
 func Errorf(format string, args ...any) {
-	errLog.LogOut(nil, &format, args...)
+	logger.logout(ErrorLevel, &format, args...)
 }
